@@ -1,10 +1,16 @@
-import { Directive } from '@angular/core';
+import { Directive, Input, ElementRef, OnChanges } from '@angular/core';
 
 @Directive({
-  selector: '[appHighlight]'
+  selector: '[highlight]'
 })
-export class HighlightDirective {
+export class HighlightDirective implements OnChanges {
+  defaultColor =  'yellow'; 
+  @Input('highlight') bgColor: string;
 
-  constructor() { }
+  constructor(private el: ElementRef) {
+  }
 
+  ngOnChanges() {
+    this.el.nativeElement.style.backgroundColor = this.bgColor || this.defaultColor;
+  }
 }
