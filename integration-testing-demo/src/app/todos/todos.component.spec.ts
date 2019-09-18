@@ -60,6 +60,21 @@ describe('TodosComponent', () => {
 
     expect(component.todos.length).toBe(3);
   });
+
+  it('should load todos using promise returned from the server', async(() => {
+    let service = TestBed.get(TodoService);
+    spyOn(service, 'getTodosPromise').and.returnValue(Promise.resolve([1, 2, 3]));
+
+    fixture.detectChanges(); // guess why
+
+    // expect(component.todos.length).toBe(3); 
+    // it fails without async because expect is called before the promise resolves
+
+    // solution
+    fixture.whenStable().then(() => {
+      expect(component.ptodo.length).toBe(3);
+    })
+  }));
 });
 
 /* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
