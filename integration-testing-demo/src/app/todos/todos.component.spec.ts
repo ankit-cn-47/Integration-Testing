@@ -24,7 +24,7 @@ describe('TodosComponent', () => {
   });
 }); */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { TodoService } from './todo.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TodosComponent } from './todos.component';
@@ -63,7 +63,7 @@ describe('TodosComponent', () => {
 
   it('should load todos using promise returned from the server', async(() => {
     let service = TestBed.get(TodoService);
-    spyOn(service, 'getTodosPromise').and.returnValue(Promise.resolve([1, 2, 3]));
+    spyOn(service, 'getTodosPromise').and.returnValue(Promise.resolve([[1, 2, 3]]));
 
     fixture.detectChanges(); // guess why
 
@@ -71,9 +71,11 @@ describe('TodosComponent', () => {
     // it fails without async because expect is called before the promise resolves
 
     // solution
+    /* tick();
+    expect(component.ptodos.length).toBe(3); */
     fixture.whenStable().then(() => {
-      expect(component.ptodo.length).toBe(3);
-    })
+      expect(component.ptodos.length).toBe(3);
+    });
   }));
 });
 

@@ -8,7 +8,7 @@ import { TodoService } from './todo.service';
 })
 export class TodosComponent implements OnInit {
   todos: any[] = [];
-  ptodo: any[] = [];
+  ptodos: any[] = [];
   message; 
 
   constructor(private service: TodoService) {}
@@ -16,7 +16,7 @@ export class TodosComponent implements OnInit {
   ngOnInit() { 
     this.service.getTodos().subscribe((t: any[]) => this.todos = t);
 
-    this.service.getTodosPromise().then((td: any[]) => this.ptodo = td);
+    this.service.getTodosPromise().then((td: any[]) => this.ptodos = td);
   }
 
   add() {

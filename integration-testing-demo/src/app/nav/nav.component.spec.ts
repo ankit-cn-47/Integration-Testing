@@ -12,7 +12,7 @@ describe('NavComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NavComponent ],
-      imports: [ 
+      imports: [
         RouterTestingModule.withRoutes([])
       ]
     })
